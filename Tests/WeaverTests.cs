@@ -43,7 +43,7 @@ public class WeaverTests
         var parameters = addedCtor.GetParameters();
 
         Assert.AreEqual(1, parameters.Length);
-        Assert.AreEqual("f1", parameters[0].Name);
+        Assert.AreEqual("f2", parameters[0].Name);
         Assert.AreEqual(typeof(object), parameters[0].ParameterType);
     }
 
@@ -53,8 +53,9 @@ public class WeaverTests
         var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length > 0);
         var instance = addedCtor.Invoke(new[] { "test" });
 
-        Assert.AreEqual("test", instance.GetType().GetProperty("F1").GetValue(instance, null));
-        Assert.IsNull(instance.GetType().GetProperty("F2").GetValue(instance, null));
+        Assert.AreEqual(123, instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.AreEqual("test", instance.GetType().GetProperty("F2").GetValue(instance, null));
+        Assert.IsNull(instance.GetType().GetProperty("F3").GetValue(instance, null));
     }
 
     [Test]

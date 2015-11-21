@@ -2,7 +2,9 @@
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Mono.Collections.Generic;
 
 public class ModuleWeaver
@@ -44,26 +46,48 @@ public class ModuleWeaver
         }
     }
     
-    void AddConstructor(TypeDefinition type, Predicate<FieldDefinition> fieldCondition) {
+    void AddConstructor(TypeDefinition type, Func<FieldDefinition, bool> fieldCondition) {
         var constructor = new MethodDefinition(".ctor", MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName, typeSystem.Void);
-        var objectConstructor = ModuleDefinition.ImportReference(typeSystem.Object.Resolve().GetConstructors().First());
+        var bannedFields = new HashSet<FieldDefinition>();
+        MethodReference parentConstructor;
+        if (!TryFindDefaultConstructor(type, out parentConstructor)) {
+            parentConstructor = ModuleDefinition.ImportReference(typeSystem.Object.Resolve().GetConstructors().First());
+        } else {
+            MethodDefinition parentConstructorDefinition = parentConstructor.Resolve();
+            foreach (var instruction in parentConstructorDefinition.Body.Instructions) {
+                if (instruction.OpCode == OpCodes.Stfld) {
+                    var fieldReference = (FieldReference)instruction.Operand;
+                    bannedFields.Add(fieldReference.Resolve());
+                }
+            }
+        }
         var processor = constructor.Body.GetILProcessor();
         processor.Emit(OpCodes.Ldarg_0);
-        processor.Emit(OpCodes.Call, objectConstructor);
+        processor.Emit(OpCodes.Call, parentConstructor);
         int argumentCount = 1; // `this` is arg 0
-        foreach (var field in type.Fields) {
-            if (fieldCondition(field)) {
-                var argumentId = argumentCount;
-                argumentCount++;
+        foreach (var field in type.Fields.Where(fieldCondition)) {
+            if (bannedFields.Contains(field)) continue;
+            var argumentId = argumentCount;
+            argumentCount++;
 
-                AddFieldConstructorArgument(constructor, field, argumentId, processor);
-            }
+            AddFieldConstructorArgument(constructor, field, argumentId, processor);
         }
         processor.Emit(OpCodes.Ret);
 
         if (VerifyNoSimilarConstructors(type.Methods, constructor)) {
             type.Methods.Add(constructor);
         }
+    }
+
+    public bool TryFindDefaultConstructor(TypeDefinition type, out MethodReference super) {
+        foreach (var method in type.Methods.Where(m => m.Name == ".ctor")) {
+            if (method.Parameters.Count == 0) {
+                super = method;
+                return true;
+            }
+        }
+        super = null;
+        return false;
     }
 
     private void AddFieldConstructorArgument(MethodDefinition constructor, FieldDefinition field, int argumentId, ILProcessor processor) {
