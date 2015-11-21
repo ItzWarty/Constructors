@@ -81,6 +81,16 @@ public class WeaverTests
     }
 
     [Test]
+    public void ValidateNoArgsConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.NoArgsExampleClass");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length == 0);
+        var instance = addedCtor.Invoke(null);
+
+        Assert.IsNull(instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.IsNull(instance.GetType().GetProperty("F2").GetValue(instance, null));
+    }
+
+    [Test]
     public void TonsOfAllArgsConstructor_Properties() {
         var injectedObject = new object();
         var injectedTime = DateTime.Now;

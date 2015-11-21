@@ -35,6 +35,11 @@ public class ModuleWeaver
                 AddConstructor(type, field => true);
                 LogInfo("Added all arguments constructor to '" + type.Name + "'.");
             }
+            if (type.RequestsNoArgsConstructor()) {
+                type.CustomAttributes.Remove(type.GetNoArgsConstructorAttributeOrNull());
+                AddConstructor(type, field => false);
+                LogInfo("Added no arguments constructor to '" + type.Name + "'.");
+            }
         }
     }
     

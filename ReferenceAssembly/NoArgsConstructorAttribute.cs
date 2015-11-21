@@ -2,5 +2,5 @@
 
 namespace Fody.Constructors {
     [AttributeUsage(AttributeTargets.Class)]
-    public class AllArgsConstructorAttribute : Attribute { }
+    public class NoArgsConstructorAttribute : Attribute { }
 }
