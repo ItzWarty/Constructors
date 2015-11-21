@@ -1,5 +1,5 @@
-﻿using System;
-using Fody.Constructors;
+﻿using Fody.Constructors;
+using System;
 
 namespace AssemblyToProcess {
     [RequiredArgsConstructor]

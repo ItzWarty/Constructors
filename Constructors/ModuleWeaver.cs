@@ -3,7 +3,6 @@ using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
 public class ModuleWeaver
 {
