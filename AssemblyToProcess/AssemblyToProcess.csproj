@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllArgsExampleClass.cs" />
+    <Compile Include="TonsOfArgsExampleClass.cs" />
     <Compile Include="RequiredArgsExampleClass.cs" />
   </ItemGroup>
   <ItemGroup>

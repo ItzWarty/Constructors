@@ -80,6 +80,22 @@ public class WeaverTests
         Assert.AreEqual("asdf", instance.GetType().GetProperty("F2").GetValue(instance, null));
     }
 
+    [Test]
+    public void TonsOfAllArgsConstructor_Properties() {
+        var injectedObject = new object();
+        var injectedTime = DateTime.Now;
+
+        var type = assembly.GetType("AssemblyToProcess.TonsOfArgsExampleClass");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length > 0);
+        var instance = addedCtor.Invoke(new[] { "test", 1337, 1.337f, injectedObject, injectedTime });
+
+        Assert.AreEqual("test", instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.AreEqual(1337, instance.GetType().GetProperty("F2").GetValue(instance, null));
+        Assert.AreEqual(1.337f, instance.GetType().GetProperty("F3").GetValue(instance, null));
+        Assert.AreEqual(injectedObject, instance.GetType().GetProperty("F4").GetValue(instance, null));
+        Assert.AreEqual(injectedTime, instance.GetType().GetProperty("F5").GetValue(instance, null));
+    }
+
 #if(DEBUG)
     [Test]
     public void PeVerify()

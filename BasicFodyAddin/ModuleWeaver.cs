@@ -68,7 +68,7 @@ public class ModuleWeaver
         } else if (argumentId == 3) {
             processor.Emit(OpCodes.Ldarg_3);
         } else {
-            processor.Emit(OpCodes.Ldarg_S, argumentId);
+            processor.Emit(OpCodes.Ldarg, argumentId);
         }
         processor.Emit(OpCodes.Stfld, field);
     }
