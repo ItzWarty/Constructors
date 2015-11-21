@@ -37,6 +37,26 @@ public class WeaverTests
     }
 
     [Test]
+    public void ValidateTrivialRequiredArgsConstructor_HasOnlyDefaultConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.TrivialRequiredArgsExampleClass");
+        var ctors = type.GetConstructors();
+        var defaultConstructor = ctors.First();
+        var defaultConstructorParameters = defaultConstructor.GetParameters();
+
+        Assert.AreEqual(1, ctors.Length);
+        Assert.AreEqual(0, defaultConstructorParameters.Length);
+    }
+
+    [Test]
+    public void ValidateTrivialRequiredArgsConstructor_Properties() {
+        var type = assembly.GetType("AssemblyToProcess.TrivialRequiredArgsExampleClass");
+        var addedCtor = type.GetConstructors().First();
+        var instance = addedCtor.Invoke(null);
+
+        Assert.AreEqual(123, instance.GetType().GetProperty("F1").GetValue(instance, null));
+    }
+
+    [Test]
     public void ValidateRequiredArgsConstructor_Interface() {
         var type = assembly.GetType("AssemblyToProcess.RequiredArgsExampleClass");
         var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length > 0);

@@ -45,6 +45,7 @@
     <Compile Include="NoArgsExampleClass.cs" />
     <Compile Include="TonsOfArgsExampleClass.cs" />
     <Compile Include="RequiredArgsExampleClass.cs" />
+    <Compile Include="TrivialRequiredArgsExampleClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReferenceAssembly\ReferenceAssembly.csproj">
