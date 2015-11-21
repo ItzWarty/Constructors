@@ -106,6 +106,64 @@ public class WeaverTests
         Assert.AreEqual(injectedTime, instance.GetType().GetProperty("F5").GetValue(instance, null));
     }
 
+    [Test]
+    public void VerifyMultiConstructor1_DefaultConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass1");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length == 0);
+        var instance = addedCtor.Invoke(null);
+
+        Assert.IsNull(instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.IsNull(instance.GetType().GetProperty("F2").GetValue(instance, null));
+    }
+
+    [Test]
+    public void VerifyMultiConstructor1_RequiredArgsConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass1");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length > 0);
+        var instance = addedCtor.Invoke(new[] { "test", "asdf" });
+
+        Assert.AreEqual("test", instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.AreEqual("asdf", instance.GetType().GetProperty("F2").GetValue(instance, null));
+    }
+
+    [Test]
+    public void VerifyMultiConstructor1_HasOnlyTwoConstructors() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass1");
+        foreach (var ctor in type.GetConstructors()) {
+            Console.WriteLine(ctor);
+        }
+        Assert.AreEqual(2, type.GetConstructors().Length);
+    }
+
+    [Test]
+    public void VerifyMultiConstructor2_DefaultConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass2");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length == 0);
+        var instance = addedCtor.Invoke(null);
+
+        Assert.IsNull(instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.IsNull(instance.GetType().GetProperty("F2").GetValue(instance, null));
+    }
+
+    [Test]
+    public void VerifyMultiConstructor2_RequiredArgsConstructor() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass2");
+        var addedCtor = type.GetConstructors().First(c => c.GetParameters().Length > 0);
+        var instance = addedCtor.Invoke(new[] { "test", "asdf" });
+
+        Assert.AreEqual("test", instance.GetType().GetProperty("F1").GetValue(instance, null));
+        Assert.AreEqual("asdf", instance.GetType().GetProperty("F2").GetValue(instance, null));
+    }
+
+    [Test]
+    public void VerifyMultiConstructor2_HasOnlyTwoConstructors() {
+        var type = assembly.GetType("AssemblyToProcess.MultiConstructorExampleClass2");
+        foreach (var ctor in type.GetConstructors()) {
+            Console.WriteLine(ctor);
+        }
+        Assert.AreEqual(2, type.GetConstructors().Length);
+    }
+
 #if(DEBUG)
     [Test]
     public void PeVerify()

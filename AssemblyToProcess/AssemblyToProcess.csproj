@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllArgsExampleClass.cs" />
+    <Compile Include="MultiConstructorExampleClass1.cs" />
+    <Compile Include="MultiConstructorExampleClass2.cs" />
     <Compile Include="NoArgsExampleClass.cs" />
     <Compile Include="TonsOfArgsExampleClass.cs" />
     <Compile Include="RequiredArgsExampleClass.cs" />

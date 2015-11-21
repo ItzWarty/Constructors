@@ -3,6 +3,7 @@ using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
 using System;
 using System.Linq;
+using Mono.Collections.Generic;
 
 public class ModuleWeaver
 {
@@ -59,7 +60,10 @@ public class ModuleWeaver
             }
         }
         processor.Emit(OpCodes.Ret);
-        type.Methods.Add(constructor);
+
+        if (VerifyNoSimilarConstructors(type.Methods, constructor)) {
+            type.Methods.Add(constructor);
+        }
     }
 
     private void AddFieldConstructorArgument(MethodDefinition constructor, FieldDefinition field, int argumentId, ILProcessor processor) {
@@ -75,5 +79,15 @@ public class ModuleWeaver
             processor.Emit(OpCodes.Ldarg, argumentId);
         }
         processor.Emit(OpCodes.Stfld, field);
+    }
+
+    private bool VerifyNoSimilarConstructors(Collection<MethodDefinition> methods, MethodDefinition testConstructor) {
+        var constructorParameterComparer = new ConstructorParameterEqualityComparer();
+        foreach (var otherConstructor in methods.Where(m => m.Name == ".ctor")) {
+            if (otherConstructor.Parameters.SequenceEqual(testConstructor.Parameters, constructorParameterComparer)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
