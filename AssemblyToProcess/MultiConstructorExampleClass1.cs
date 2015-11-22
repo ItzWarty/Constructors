@@ -5,8 +5,8 @@ using System.Text;
 using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [NoArgsConstructor]
-    [RequiredArgsConstructor]
+    [DefaultConstructor]
+    [RequiredFieldsConstructor]
     public class MultiConstructorExampleClass1 {
         private readonly object f1;
         private readonly string f2;

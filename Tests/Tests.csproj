@@ -48,30 +48,37 @@
       <HintPath>..\packages\FodyCecil.1.29.2\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MultiConstructorTests_1.cs" />
+    <Compile Include="MultiConstructorTests_2.cs" />
+    <Compile Include="NoArgsConstructorTests.cs" />
+    <Compile Include="PEVerifierTests.cs" />
+    <Compile Include="RequiredArgsConstructorTests.cs" />
+    <Compile Include="TonsOfArgsTests.cs" />
+    <Compile Include="TrivialRequiredFieldsTests.cs" />
     <Compile Include="Verifier.cs" />
-    <Compile Include="WeaverTests.cs" />
+    <Compile Include="UninitializedFieldsTests.cs" />
+    <Compile Include="WeaverTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj">
+      <Project>{e97e649f-b703-47e3-b18a-0871d3498742}</Project>
+      <Name>AssemblyToProcess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Constructors\Constructors.csproj">
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
       <Name>Constructors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <Project>{E97E649F-B703-47E3-B18A-0871D3498742}</Project>
-      <Name>AssemblyToProcess</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

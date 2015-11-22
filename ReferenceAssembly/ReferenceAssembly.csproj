@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllArgsConstructorAttribute.cs" />
-    <Compile Include="NoArgsConstructorAttribute.cs" />
-    <Compile Include="RequiredArgsConstructorAttribute.cs" />
+    <Compile Include="AbstractConstructorAttributeBase.cs" />
+    <Compile Include="AllFieldsConstructorAttribute.cs" />
+    <Compile Include="UninitializedFieldsConstructorAttribute.cs" />
+    <Compile Include="Internal\FieldInfo.cs" />
+    <Compile Include="DefaultConstructorAttribute.cs" />
+    <Compile Include="RequiredFieldsConstructorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

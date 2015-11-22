@@ -5,7 +5,7 @@ using System.Text;
 using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [RequiredArgsConstructor]
+    [RequiredFieldsConstructor]
     public class TrivialRequiredArgsExampleClass {
         private int f1 = 123;
 

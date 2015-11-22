@@ -2,7 +2,7 @@
 using System;
 
 namespace AssemblyToProcess {
-    [RequiredArgsConstructor]
+    [RequiredFieldsConstructor]
     public class TonsOfArgsExampleClass {
         private readonly string f1;
         private readonly int f2;

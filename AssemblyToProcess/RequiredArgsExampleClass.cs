@@ -1,7 +1,7 @@
 ﻿using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [RequiredArgsConstructor]
+    [RequiredFieldsConstructor]
     public class RequiredArgsExampleClass {
         private readonly int f1 = 123;
         private readonly object f2;

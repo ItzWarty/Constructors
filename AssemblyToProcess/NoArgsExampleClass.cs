@@ -1,7 +1,7 @@
 ﻿using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [NoArgsConstructor]
+    [DefaultConstructor]
     public class NoArgsExampleClass {
         private readonly object f1;
         private readonly string f2 = "asdf"; // Note: noargsctor will not set this to "asdf"; it will be null!

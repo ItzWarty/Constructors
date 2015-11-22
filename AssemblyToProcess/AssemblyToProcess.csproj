@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllArgsExampleClass.cs" />
+    <Compile Include="UninitializedFieldsExampleClass.cs" />
     <Compile Include="MultiConstructorExampleClass1.cs" />
     <Compile Include="MultiConstructorExampleClass2.cs" />
     <Compile Include="NoArgsExampleClass.cs" />

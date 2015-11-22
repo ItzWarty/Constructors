@@ -1,8 +1,8 @@
 ﻿using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [AllArgsConstructor]
-    public class AllArgsExampleClass {
+    [UninitializedFieldsConstructor]
+    public class UninitializedFieldsExampleClass {
         private readonly object f1;
         private string f2;
 

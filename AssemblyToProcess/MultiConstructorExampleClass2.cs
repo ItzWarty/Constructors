@@ -1,8 +1,8 @@
 ﻿using Fody.Constructors;
 
 namespace AssemblyToProcess {
-    [NoArgsConstructor]
-    [RequiredArgsConstructor]
+    [DefaultConstructor]
+    [RequiredFieldsConstructor]
     public class MultiConstructorExampleClass2 {
         private readonly object f1;
         private readonly string f2;
