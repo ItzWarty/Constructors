@@ -7,7 +7,9 @@ using Mono.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Constructors.Fody;
 
+// ReSharper disable once CheckNamespace
 public class ModuleWeaver {
    // Will log an informational message to MSBuild
    public Action<string> LogInfo { get; set; }
