@@ -2,12 +2,12 @@
 using System;
 
 namespace Fody.Constructors {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class DefaultConstructorAttribute : AbstractConstructorAttributeBase {
-        public DefaultConstructorAttribute() : base(FieldCondition) { }
+   [AttributeUsage(AttributeTargets.Class)]
+   public class DefaultConstructorAttribute : AbstractConstructorAttributeBase {
+      public DefaultConstructorAttribute() : base(FieldCondition) { }
 
-        private static bool FieldCondition(FieldInfo field) {
-            return false;
-        }
-    }
+      private static bool FieldCondition(FieldInfo field) {
+         return false;
+      }
+   }
 }
