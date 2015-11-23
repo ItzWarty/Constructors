@@ -67,6 +67,7 @@
     <Compile Include="RequiredArgsConstructorTests.cs" />
     <Compile Include="TonsOfArgsTests.cs" />
     <Compile Include="TrivialRequiredFieldsTests.cs" />
+    <Compile Include="AllFieldsTests.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="UninitializedFieldsTests.cs" />
     <Compile Include="WeaverTestsBase.cs" />

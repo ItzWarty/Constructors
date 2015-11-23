@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllFieldsExampleClass.cs" />
     <Compile Include="UninitializedFieldsExampleClass.cs" />
     <Compile Include="MultiConstructorExampleClass1.cs" />
     <Compile Include="MultiConstructorExampleClass2.cs" />

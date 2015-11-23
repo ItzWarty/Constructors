@@ -29,7 +29,8 @@ public class ModuleWeaver {
          var defaultConstructorAttribute = type.FindAndActivateCustomAttributeOrNull<DefaultConstructorAttribute>();
          var otherConstructorAttributes = new AbstractConstructorAttributeBase[] {
             type.FindAndActivateCustomAttributeOrNull<RequiredFieldsConstructorAttribute>(),
-            type.FindAndActivateCustomAttributeOrNull<UninitializedFieldsConstructorAttribute>()
+            type.FindAndActivateCustomAttributeOrNull<UninitializedFieldsConstructorAttribute>(),
+            type.FindAndActivateCustomAttributeOrNull<AllFieldsConstructorAttribute>()
          }.Where(x => x != null).ToArray();
 
          if (defaultConstructorAttribute == null && otherConstructorAttributes.Length == 0) continue;
