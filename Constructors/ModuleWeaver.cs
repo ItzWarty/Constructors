@@ -54,6 +54,9 @@ public class ModuleWeaver {
       var matches = new List<FieldDefinition>();
       var initializedFields = EnumerateInitializedFields(defaultConstructor);
       foreach (var field in type.Fields) {
+         if (field.IsStatic) {
+            continue;
+         }
          var fieldInfo = new FieldInfo {
             IsInitOnly = field.IsInitOnly,
             HasNonDefaultFieldInitializer = initializedFields.Contains(field)

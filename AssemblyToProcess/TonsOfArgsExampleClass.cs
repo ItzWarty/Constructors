@@ -4,6 +4,8 @@ using System;
 namespace AssemblyToProcess {
    [RequiredFieldsConstructor]
    public class TonsOfArgsExampleClass {
+      private static readonly object s0 = new object();
+      private static readonly object s1;
       private readonly string f1;
       private readonly int f2;
       private readonly float f3;
